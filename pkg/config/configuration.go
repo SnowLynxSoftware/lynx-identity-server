@@ -22,7 +22,7 @@ func LoadEnvIntoConfiguration() *Config {
 	dbConnectionString := os.Getenv("DB_CONNECTION_STRING")
 	redisConnectionString := os.Getenv("REDIS_CONNECTION_STRING")
 
-	appConfig := Config{AppPort: appPort, AppKey: appKey, DBConnectionString: dbConnectionString, RedisConnectionString: redisConnectionString}
+	appConfig := Config{AppPort: appPort, AppKey: appKey[7:len(appKey)], DBConnectionString: dbConnectionString, RedisConnectionString: redisConnectionString}
 
 	return &appConfig
 }

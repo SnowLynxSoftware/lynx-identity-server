@@ -2,6 +2,7 @@ package main
 
 import (
 	"SnowLynxSoftware/lynx-identity-server/pkg/config"
+	"SnowLynxSoftware/lynx-identity-server/pkg/database"
 	"SnowLynxSoftware/lynx-identity-server/pkg/routers"
 	_ "github.com/joho/godotenv/autoload"
 )
@@ -10,6 +11,9 @@ func main() {
 
 	// Load Configuration
 	config.AppConfig = config.LoadEnvIntoConfiguration()
+
+	// Connect to the database
+	database.DBConnection = database.GetDBConnection()
 
 	// Setup Gin Routers
 	r := routers.SetupRouter()
