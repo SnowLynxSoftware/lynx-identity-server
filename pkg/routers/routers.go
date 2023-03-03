@@ -3,14 +3,26 @@ package routers
 import (
 	"SnowLynxSoftware/lynx-identity-server/pkg/auth"
 	"SnowLynxSoftware/lynx-identity-server/pkg/users"
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 func SetupRouter() *gin.Engine {
 
 	// Setup Default Router
 	r := gin.Default()
+
+	// Load Templates
+	r.LoadHTMLGlob("templates/*")
+	// r.LoadHTMLGlob("templates/**/*")
+
+	// Index Page
+	r.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.tmpl", gin.H{
+			"title": "Lynx Identity Server Page",
+		})
+	})
 
 	// Health Check
 	r.GET("/health", func(c *gin.Context) {
